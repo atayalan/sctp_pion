@@ -18,6 +18,8 @@ var ErrParamTypeUnhandled = errors.New("unhandled ParamType")
 
 func buildParam(typeParam paramType, rawParam []byte) (param, error) { //nolint:cyclop
 	switch typeParam {
+	case supportedAddrTypes:
+		return (&paramSupportedAddrTypes{}).unmarshal(rawParam)
 	case forwardTSNSupp:
 		return (&paramForwardTSNSupported{}).unmarshal(rawParam)
 	case supportedExt:
